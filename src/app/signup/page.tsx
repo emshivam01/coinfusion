@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 
@@ -11,14 +11,27 @@ const Signup = () => {
     password: "",
   });
 
+  const [disabledBtn, setDisabledBtn] = useState(true);
+
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/user/login", user);
+      console.log("Clicked ");
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (
+      user.username.length > 0 &&
+      user.email.length > 0 &&
+      user.password.length > 0
+    ) {
+      setDisabledBtn(false);
+    }
+  }, [user]);
 
   return (
     <div className="w-screen h-screen  flex justify-center items-center ">
@@ -57,7 +70,12 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="bg-[#18181b] text-center text-sm font-semibold  p-3 rounded-md  w-full hover:bg-[#2e2e30]"
+            className={`${
+              disabledBtn ? "cursor-not-allowed" : ""
+            } bg-[#18181b] text-center text-sm font-semibold p-3 rounded-md w-full ${
+              disabledBtn ? "hover:bg-[#18181b]" : "hover:bg-[#2e2e30]"
+            }`}
+            disabled={disabledBtn}
           >
             Sign up &rarr;
           </button>

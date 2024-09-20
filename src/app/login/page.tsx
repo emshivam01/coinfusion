@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 
@@ -10,6 +10,8 @@ const Login = () => {
     password: "",
   });
 
+  const [disabledBtn, setDisabledBtn] = useState(true);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -18,6 +20,12 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      setDisabledBtn(false);
+    }
+  }, [user]);
 
   return (
     <div className="w-screen h-screen  flex justify-center items-center">
@@ -47,7 +55,12 @@ const Login = () => {
 
           <button
             type="submit"
-            className="bg-[#18181b] text-center text-sm font-semibold  p-3 rounded-md  w-full hover:bg-[#1e1e2a]"
+            className={`${
+              disabledBtn ? "cursor-not-allowed" : ""
+            } bg-[#18181b] text-center text-sm font-semibold p-3 rounded-md w-full ${
+              disabledBtn ? "hover:bg-[#18181b]" : "hover:bg-[#2e2e30]"
+            }`}
+            disabled={disabledBtn}
           >
             Log in &rarr;
           </button>
