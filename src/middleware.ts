@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
 
     // If the user is on a public path but has a token, redirect to the home page
     if (publicPath && token) {
-        return NextResponse.redirect(new URL('/', request.url))
+        return NextResponse.redirect(new URL('/profile', request.url))
     }
     // If the user is not on a public path and doesn't have a token, redirect to the login page
     else if (!publicPath && !token) {

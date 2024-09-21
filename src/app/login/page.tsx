@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -12,12 +14,18 @@ const Login = () => {
 
   const [disabledBtn, setDisabledBtn] = useState(true);
 
+  const router = useRouter();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/user/login", user);
+      console.log(response?.data?.message, 25);
+      toast.success(response?.data?.message);
+      router.push("/profile");
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   };
 
