@@ -36,8 +36,8 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className="w-screen h-screen  flex justify-center items-center">
-      <div className="max-w-md w-[380px] mx-auto rounded-none md:rounded-2xl p-8 border border-[#27272a] md:p-8 mb-60 md:mb-0">
+    <div className="w-screen h-full md:mt-14 flex justify-center items-center">
+      <div className="max-w-md w-[380px] mx-auto rounded-none md:rounded-2xl p-8 border border-[#3b3b41] md:p-8 mb-60 md:mb-0">
         <h1 className="font-bold text-3xl mb-6">Log in</h1>
 
         <form onSubmit={handleLogin} className="">
@@ -65,8 +65,8 @@ const Login = () => {
             type="submit"
             className={`${
               disabledBtn ? "cursor-not-allowed" : ""
-            } bg-[#18181b] text-center text-sm font-semibold p-3 rounded-md w-full ${
-              disabledBtn ? "hover:bg-[#18181b]" : "hover:bg-[#2e2e30]"
+            } bg-[#486dfb] text-center text-sm font-semibold p-3 rounded-md w-full ${
+              disabledBtn ? "hover:bg-[#486dfb]" : "hover:bg-[#3653d1]"
             }`}
             disabled={disabledBtn}
           >
@@ -77,7 +77,7 @@ const Login = () => {
         <p className="text-center text-sm font-medium my-3">OR</p>
 
         <Link href="/signup">
-          <button className="bg-[#18181b] text-center text-sm font-semibold  p-3 rounded-md  w-full hover:bg-[#1e1e2a]">
+          <button className="bg-[#486dfb] text-center text-sm font-semibold  p-3 rounded-md  w-full hover:bg-[#3653d1]">
             Sign up &rarr;
           </button>
         </Link>
