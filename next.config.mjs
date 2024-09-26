@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["avatar.vercel.sh"], // Add the domain here
+    domains: ["avatar.vercel.sh", "coin-images.coingecko.com"], // Add the domain here
   },
 };
 

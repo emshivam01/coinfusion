@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/magicui/marquee";
 import Image from "next/image";
+import { TrendingDown } from "lucide-react";
 
 const reviews = [
   {
@@ -58,29 +59,36 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+        "relative w-60 cursor-pointer overflow-hidden rounded-xl border p-4",
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
-      <div className="flex flex-row items-center gap-2">
+      <div className="flex flex-row items-center gap-2 border">
+        <div></div>
         <Image
           className="rounded-full"
           width="32"
           height="32"
           alt=""
-          src={img}
+          src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"
         />
         <div className="flex flex-col">
           <figcaption className="text-sm font-medium dark:text-white">
-            {name}
+            Bitcoin
           </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{username}</p>
+          <p className="text-xs font-medium dark:text-white/40">BTC</p>
+        </div>
+        <div className="text-sm flex flex-col items-end">
+          <p>$74000</p>
+          <div className="flex gap-2 items-center">
+            <TrendingDown size={16} />
+            <p>-2.10%</p>
+          </div>
         </div>
       </div>
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
     </figure>
   );
 };
