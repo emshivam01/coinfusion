@@ -5,11 +5,13 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import AssetCard from "@/components/AssetCard";
-//
+import { useSelector } from "react-redux";
 
 export default function Profile() {
   const [data, setData] = useState(null);
   const [portfolioData, setPortfolioData] = useState([]);
+
+  const userData = useSelector((state) => state.user);
 
   const router = useRouter();
 
@@ -17,22 +19,24 @@ export default function Profile() {
     try {
       const response = await axios.get("/api/user/me");
       setData(response.data.data); // Remove optional chaining for better error handling
+
+      console.log(userData);
     } catch (error) {
       console.error("Failed to fetch profile:", error);
       toast("Error fetching profile data");
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post("/api/user/logout");
-      toast(response.data.message);
-      router.push("/login");
-    } catch (error) {
-      console.error("Logout failed:", error);
-      toast("Error during logout");
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await axios.post("/api/user/logout");
+  //     toast(response.data.message);
+  //     router.push("/login");
+  //   } catch (error) {
+  //     console.error("Logout failed:", error);
+  //     toast("Error during logout");
+  //   }
+  // };
 
   const fetchPortfolio = async () => {
     try {
@@ -67,12 +71,6 @@ export default function Profile() {
             )}
           </div>
         </div>
-        <button
-          onClick={handleLogout}
-          className="bg-[#3a3a3c] text-center text-sm font-semibold p-3 rounded-md h-10 px-8 hover:bg-[#1e1e2a]"
-        >
-          Log out
-        </button>
       </div>
     </div>
   );

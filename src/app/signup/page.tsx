@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Mail, Lock, User } from "lucide-react";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -42,45 +43,53 @@ const Signup = () => {
 
   return (
     <div className="w-screen h-full md:mt-14  flex justify-center items-center ">
-      <div className="max-w-md w-[380px] mx-auto rounded-none md:rounded-2xl p-8 border border-[#3b3b41] md:p-8 mb-48 md:mb-0">
+      <div className="max-w-md w-[380px] mx-auto bg-[#f8f8f8] dark:bg-[#141414] rounded-none md:rounded-2xl p-8  md:p-8 mb-48 md:mb-0 border shadow-xl">
         <h1 className="font-bold text-3xl mb-6">Sign up</h1>
 
         <form onSubmit={handleSignup} className="">
-          <label className="text-sm ">Username</label>
+          <label className="text-sm  font-medium ">Username</label>
           <br />
-          <input
-            className="bg-[#27272a] mt-1 px-4 py-2 mb-2 rounded-md w-full"
-            type="text"
-            placeholder="walterwhite"
-            value={user.username}
-            onChange={(e) => setUser({ ...user, username: e.target.value })}
-          />
+          <div className="flex items-center mt-1 mb-2 px-3 bg-white  border border-gray-500 dark:border-[#3b3b3b] dark:bg-[#27272a] rounded-md">
+            <User size={16} className="" />
+            <input
+              className=" dark:bg-[#27272a]  px-4 py-2 focus:outline-none rounded-md w-full"
+              type="text"
+              placeholder="walterwhite"
+              value={user.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
+            />
+          </div>
+          <label className="text-sm  font-medium">Email</label>
           <br />
-          <label className="text-sm ">Email</label>
+          <div className="flex items-center mt-1 mb-2 px-3 bg-white border border-gray-500 dark:border-[#3b3b3b] dark:bg-[#27272a] rounded-md">
+            <Mail size={16} className="" />
+            <input
+              className=" dark:bg-[#27272a]  px-4 py-2 focus:outline-none rounded-md w-full"
+              type="email"
+              placeholder="johndoe@eb.com"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+          </div>
+          <label className="text-sm  font-medium">Password</label>
           <br />
-          <input
-            className="bg-[#27272a] mt-1 px-4 py-2 mb-2 rounded-md w-full"
-            type="email"
-            placeholder="johndoe@eb.com"
-            value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-          />
-          <label className="text-sm ">Password</label>
-          <br />
-          <input
-            className="bg-[#27272a] mt-1 mb-8 px-4 py-2 rounded-md w-full"
-            type="password"
-            placeholder="••••••••"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-          />
+          <div className="flex items-center mt-1 mb-8 px-3 bg-white border border-gray-500 dark:border-[#3b3b3b] dark:bg-[#27272a] rounded-md">
+            <Lock size={16} className="" />
+            <input
+              className=" dark:bg-[#27272a]   px-4 py-2 focus:outline-none rounded-md w-full"
+              type="password"
+              placeholder="••••••••••••"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
+          </div>
 
           <button
             type="submit"
             className={`${
               disabledBtn ? "cursor-not-allowed" : ""
-            } bg-[#486dfb] text-center text-sm font-semibold p-3 rounded-md w-full ${
-              disabledBtn ? "hover:bg-[#486dfb]" : "hover:bg-[#3653d1]"
+            } bg-[#333333] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white  text-center text-sm font-semibold p-3 rounded-md w-full ${
+              disabledBtn ? "hover:bg-[#333333]" : "hover:bg-[#4d4d4d]"
             }`}
             disabled={disabledBtn}
           >
@@ -91,7 +100,7 @@ const Signup = () => {
         <p className="text-center text-sm font-medium my-3">OR</p>
 
         <Link href="/login">
-          <button className="bg-[#486dfb] text-center text-sm font-semibold  p-3 rounded-md  w-full hover:bg-[#3653d1]">
+          <button className="bg-[#333333] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white  text-center text-sm font-semibold  p-3 rounded-md  w-full hover:bg-[#4d4d4d]">
             Log in &rarr;
           </button>
         </Link>

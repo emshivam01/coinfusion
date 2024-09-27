@@ -19,6 +19,8 @@ export const POST = async (request: NextRequest) => {
       email,
     });
 
+
+
     if (!existingUser) {
       return NextResponse.json(
         {
@@ -55,9 +57,13 @@ export const POST = async (request: NextRequest) => {
 
     const token = jwt.sign(tokenPayload, process.env.TOKEN_SECRET!, { expiresIn: "1d" })
 
+    existingUser.password = ""
+
     const response = NextResponse.json({
       message: "Login successful",
       success: true,
+      user: existingUser
+
     })
     response.cookies.set("token", token, {
       httpOnly: true,

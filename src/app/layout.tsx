@@ -5,6 +5,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"; // sonner toaster via shadcn
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/context/ThemeContext";
+import StoreProvider from "@/redux/StoreProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,7 +17,6 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
 export const metadata: Metadata = {
   title: "Coinfusion",
   description: "Cryptocurrency portfolio tracker",
@@ -32,12 +32,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Toaster />
-          {/* <div className="hidden md:block"></div> */}
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider>
+            <Navbar />
+            <main>{children}</main>
+            <Toaster />
+            {/* <div className="hidden md:block"></div> */}
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
