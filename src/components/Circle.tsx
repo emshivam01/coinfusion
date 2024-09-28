@@ -2,7 +2,7 @@ import OrbitingCircles from "@/components/magicui/orbiting-circles";
 
 export default function Circle() {
   return (
-    <div className="absolute top-0 flex h-[650px] w-full flex-col items-center justify-center overflow-hidden rounded-lg -z-50 bg-transparent">
+    <div className="absolute top-0 flex h-[750px] md:h-[650px] w-full flex-col items-center justify-center overflow-hidden rounded-lg -z-50 bg-transparent">
       <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-black"></span>
 
       {/* Inner Circles */}
