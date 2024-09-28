@@ -14,7 +14,6 @@ const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const userData = useSelector((state: RootState) => state.user);
   const router = useRouter();
-  const currentPath = usePathname(); // Get the current path
 
   const dispatch = useDispatch();
 

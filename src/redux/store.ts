@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
+import cryptoReducer from "./slices/cryptoSlice"
+
 
 // Set up the store
 export const store = configureStore({
     reducer: {
         user: userReducer,
+        crypto: cryptoReducer
     },
 });
 

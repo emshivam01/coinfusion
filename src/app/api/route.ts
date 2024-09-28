@@ -7,7 +7,6 @@ export const GET = async () => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                'x_cg_demo_api_key': process.env.COINGECKO_API_KEY
             }
         };
 
