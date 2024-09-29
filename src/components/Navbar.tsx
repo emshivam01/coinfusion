@@ -39,7 +39,7 @@ const Navbar = () => {
   // }, []);
 
   return (
-    <div className="m-10 text-2xl font-bold flex justify-between">
+    <div className="my-4 p-6 md:m-7 text-2xl font-bold flex justify-between">
       <Link href="/">
         <p className="text-3xl font-bold cursor-pointer">Coinfusion</p>
       </Link>
@@ -48,7 +48,11 @@ const Navbar = () => {
           onClick={toggleTheme}
           className="p-1.5  text-base text-black dark:text-white font-bold rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
         >
-          {isDarkMode ? <Sun size={20} /> : <Moon size={18} />}
+          {isDarkMode ? (
+            <Sun className="w-5" size={20} />
+          ) : (
+            <Moon className="w-5" size={18} />
+          )}
         </button>
 
         {/* Conditionally render the Log in / Log out button */}
@@ -71,13 +75,13 @@ const Navbar = () => {
         {userData.id ? (
           <button
             onClick={handleLogout}
-            className="px-4 py-2 border border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 text-sm text-black dark:text-white font-semibold rounded-md"
+            className="px-2 py-1 md:px-4 md:py-2 border border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 text-sm text-black dark:text-white font-semibold rounded-md"
           >
             Log out
           </button>
         ) : (
           <Link href="/login">
-            <button className="px-4 py-2 border border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 text-sm text-black dark:text-white font-semibold rounded-md">
+            <button className="px-2 py-1 md:px-4 md:py-2 border border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 text-sm text-black dark:text-white font-semibold rounded-md">
               Log in
             </button>
           </Link>

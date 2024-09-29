@@ -80,7 +80,7 @@ export default function MarqueeDemo() {
   );
 
   return (
-    <div className="relative flex h-[300px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background  mt-36">
+    <div className="relative flex h-[250px]  md:h-[200px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background  ">
       <Marquee className="[--duration:70s] w-full" pauseOnHover>
         {firstRow.map((review) => (
           <ReviewCard current_price={0} key={review.id} {...review} />
