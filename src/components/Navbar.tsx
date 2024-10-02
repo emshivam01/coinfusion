@@ -39,11 +39,16 @@ const Navbar = () => {
   // }, []);
 
   return (
-    <div className="my-4 p-6 md:m-7 text-2xl font-bold flex justify-between">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black my-4 p-6 md:mx-5 md:my-2 font-bold flex justify-between">
       <Link href="/">
-        <p className="text-3xl font-bold cursor-pointer">Coinfusion</p>
+        <p className="text-2xl md:text-3xl font-bold cursor-pointer">
+          Coinfusion
+        </p>
       </Link>
       <div className="flex items-center space-x-2">
+        <Link href="/cryptocurrency">Cryptocurrencies</Link>
+        <Link href="/watchlist">Watchlist</Link>
+
         <button
           onClick={toggleTheme}
           className="p-1.5  text-base text-black dark:text-white font-bold rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"

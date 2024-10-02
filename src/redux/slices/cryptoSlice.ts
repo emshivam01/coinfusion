@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define the state for each coin
 interface Coin {
+    market_cap: any;
+    current_price: any;
     id: string;
     symbol: string;
     name: string;
