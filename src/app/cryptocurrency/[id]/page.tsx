@@ -1,70 +1,150 @@
-import Image from "next/image";
-import { TrendingUp, Info } from "lucide-react";
+"use client";
 
-const page = () => {
+import Image from "next/image";
+import { TrendingUp, Info, ChevronRight } from "lucide-react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+const Page = ({ params }: { params: { id: string } }) => {
+  const [coinData, setCoinData] = useState(null); // State to hold the fetched coin data
+  const [loading, setLoading] = useState(true); // Loading state
+
+  const { id } = params;
+  const fetchCoinData = async () => {
+    try {
+      if (!id) return; // Check if the id is available before making the API call
+
+      const response = await axios.get(`/api/currencies/${id}`); // Fetch data from your API
+      setCoinData(response.data.data); // Set the coin data
+      console.log(response.data.data); // Set the coin data
+      setLoading(false); // Set loading to false once the data is fetched
+    } catch (error) {
+      console.error("Error fetching coin data:", error);
+      setLoading(false); // Set loading to false if there's an error
+    }
+  };
+
+  useEffect(() => {
+    fetchCoinData(); // Fetch the coin data when the page loads or when `id` changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  // Check for loading state
+  if (loading) {
+    return <div className="mt-24">Loading...</div>;
+  }
+
+  // Check for missing coin data (if there's an issue fetching data)
+  if (!coinData) {
+    return <div>Error loading coin data.</div>;
+  }
+
   return (
-    <div className="p-4 px-6 md:p-8 md:px-10 ">
-      <div className=" w-full flex justify-between ">
+    <div className="p-4 px-6 md:p-8 md:px-10 md:mt-28">
+      {/* Coin Header */}
+      <div className="grid grid-cols-2 items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <Image
             className="w-10 h-10 md:w-14 md:h-14"
             width={200}
             height={200}
-            src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"
-            alt="bitcoin-logo"
+            src={coinData?.image?.large}
+            alt={coinData?.name}
           />
           <div>
-            <p className="text-lg md:text-2xl font-semibold">Bitcoin (BTC)</p>
+            <p className="text-lg md:text-2xl font-semibold">
+              {coinData?.name}
+            </p>
             <p className="cursor-pointer text-sm md:text-xl font-semibold text-blue-600">
-              Rank #1
+              Rank #{coinData?.market_cap_rank}
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-end">
-          <p className="text-base md:text-2xl font-semibold">$74,000</p>
-          <div className="flex items-center gap-2">
+        <div className="text-right">
+          <p className="text-base md:text-2xl font-semibold">
+            ${coinData?.market_data?.current_price?.usd?.toLocaleString()}
+          </p>
+          <div className="flex justify-end items-center gap-2">
             <TrendingUp className="w-4" />
-            <p className="text-sm">5.1%</p>
+            <p className="text-sm">
+              {coinData?.market_data?.price_change_percentage_24h?.toFixed(2)}%
+            </p>
           </div>
         </div>
       </div>
 
-      {/* <div className="border h-60 mt-6 flex items-center justify-center rounded-md bg-gray-900">
-        Chart
-      </div> */}
-      <div className="mt-6">
-        <p>Key Metrics</p>
-        <div className="flex flex-wrap gap-4 justify-around mt-6 dark:text-white">
-          <div className="w-40 border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
-            <p className=" text-sm font-semibold"> Market Cap</p>
-            <p>$ 12,233,534,234</p>
+      {/* Key Metrics */}
+      <div className="mt-6 dark:bg-gray-900 p-3 rounded-md">
+        <p className="text-xl font-semibold">Key Metrics</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 dark:text-white">
+          <div className="border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
+            <p className="text-sm md:text-lg font-semibold">Market Cap</p>
+            <p className="text-sm md:text-base font-medium">
+              ${coinData?.market_data?.market_cap?.usd?.toLocaleString()}
+            </p>
           </div>
-          <div className="w-40 border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
-            <p className=" text-sm font-semibold"> Volume (24h)</p>
-            <p>$ 12,233,534,234</p>
+          <div className="border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
+            <p className="text-sm md:text-lg font-semibold">Volume (24h)</p>
+            <p className="text-sm md:text-base font-medium">
+              ${coinData?.market_data?.total_volume?.usd?.toLocaleString()}
+            </p>
           </div>
-          <div className="w-40 border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
-            <p className=" text-sm font-semibold"> Circulating Supply</p>
-            <p>$ 12,233,534,234</p>
+          <div className="border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
+            <p className="text-sm md:text-lg font-semibold">
+              Circulating Supply
+            </p>
+            <p className="text-sm md:text-base font-medium">
+              {coinData?.market_data?.circulating_supply?.toLocaleString()}
+            </p>
           </div>
-          <div className="w-40 border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
-            <p className=" text-sm font-semibold">All time high</p>
-            <p>$ 73,000</p>
+          <div className="border-1 p-3 bg-gray-300 dark:bg-gray-800 rounded-md">
+            <p className="text-sm md:text-lg font-semibold">All Time High</p>
+            <p className="text-sm md:text-base font-medium">
+              ${coinData?.market_data?.ath?.usd?.toLocaleString()}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* About Bitcoin */}
-
-      <div className="p-3 mt-6">
-        <div className=" flex">
-          <Info />
-          <p>About</p>
+      {/* About Coin */}
+      <div className="p-4 mt-6 bg-slate-200 dark:bg-gray-800 rounded-md text-wrap overflow-hidden">
+        <div className="flex items-center gap-2">
+          <Info className="md:text-xl font-semibold" size={20} />
+          <p className="text-base md:text-xl font-semibold">About</p>
         </div>
-        <p></p>
+        <p className="text-sm md:text-base mt-2">{coinData?.description?.en}</p>
+      </div>
+
+      {/* Docs & Whitepapers */}
+      <div className="grid gap-2 p-3 mt-6 dark:bg-gray-900 rounded-md">
+        <Link
+          target="blank"
+          className="flex justify-between items-center p-2 rounded-sm text-sm  md:text-base hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          href={coinData?.links?.homepage[0]}
+        >
+          Official Website
+          <ChevronRight />
+        </Link>
+        <Link
+          target="blank"
+          className="flex justify-between items-center p-2 rounded-sm text-sm  md:text-base hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          href={coinData?.links?.whitepaper}
+        >
+          Whitepaper
+          <ChevronRight />
+        </Link>
+        <Link
+          target="blank"
+          className="flex justify-between items-center p-2 rounded-sm text-sm  md:text-base hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          href={coinData?.links?.blockchain_site[0]}
+        >
+          Block Explorer
+          <ChevronRight />
+        </Link>
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;
