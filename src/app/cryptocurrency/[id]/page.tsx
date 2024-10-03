@@ -25,8 +25,6 @@ const Page = ({ params }: { params: { id: string } }) => {
     }
   };
 
-  const toggleWatchlist = (id) => {};
-
   useEffect(() => {
     fetchCoinData(); // Fetch the coin data when the page loads or when `id` changes
     // eslint-disable-next-line react-hooks/exhaustive-deps

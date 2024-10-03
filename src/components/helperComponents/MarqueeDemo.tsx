@@ -52,7 +52,7 @@ const ReviewCard = ({
           </div>
         </div>
         <div className="text-sm flex flex-col items-end">
-          <p>${current_price}</p>
+          <p className="truncate">${current_price.toFixed(3)}</p>
           <div className="flex gap-2 items-center">
             {isPositive ? (
               <TrendingUp size={16} className="text-[#28A745]" />

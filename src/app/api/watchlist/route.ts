@@ -14,7 +14,7 @@ export const POST = async (request: NextRequest) => {
         const token = request.cookies.get('token')?.value || "";
 
         const { name, symbol, targetPrice, notes } = await request.json()
-
+        console.log(name, symbol, notes, targetPrice)
         if (!token) {
             return NextResponse.json({ message: "Token not provided", success: false }, { status: 401 });
         }

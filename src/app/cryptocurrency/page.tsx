@@ -24,11 +24,33 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
 import Link from "next/link"; // Import Link from Next.js
+import axios from "axios";
 
 const CoinList = () => {
   const cryptoData = useSelector((state: RootState) => state.crypto.coins);
+
+  // Make sure you're passing the coin to this function
+  const handleToggleWatchlist = async (coin) => {
+    const { id, name, symbol } = coin; // Get necessary details
+    const targetPrice = 0; // Default value, can be updated later
+    const notes = ""; // Default value, can be updated later
+
+    const watchlistData = { name, symbol, targetPrice, notes };
+
+    // Call your API to toggle watchlist status
+    try {
+      const response = await axios.post("/api/watchlist", watchlistData, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      // Handle error (e.g., show notification to the user)
+    }
+  };
+
   return (
-    <div className=" p-8 mt-20">
+    <div className="p-8 mt-20">
       <Table>
         <TableCaption>A list of your popular coins.</TableCaption>
         <TableHeader>
@@ -41,7 +63,7 @@ const CoinList = () => {
             <TableHead>24h %</TableHead>
             <TableHead>7d %</TableHead>
             <TableHead>Market Cap</TableHead>
-            <TableHead>Volume(24h)</TableHead>
+            <TableHead>Volume (24h)</TableHead>
             <TableHead className="text-right">Circulating Supply</TableHead>
           </TableRow>
         </TableHeader>
@@ -51,13 +73,17 @@ const CoinList = () => {
               <TableRow key={coin.id}>
                 <TableCell className="font-medium ">{index + 1}.</TableCell>
                 <TableCell className="font-medium cursor-pointer ">
-                  <button className="w-8 flex items-center justify-center dark:hover:bg-gray-700 rounded-md  p-2">
+                  {/* Pass the coin object to the onClick handler */}
+                  <button
+                    onClick={() => handleToggleWatchlist(coin)}
+                    className="w-8 flex items-center justify-center dark:hover:bg-gray-700 rounded-md  p-2"
+                  >
                     <Star size={12} />
                   </button>
                 </TableCell>
 
-                {/* Remove <a> and just use Link */}
-                <TableCell className=" cursor-pointer">
+                {/* Correct use of Link component */}
+                <TableCell className="cursor-pointer">
                   <Link
                     href={`/cryptocurrency/${coin.id}`}
                     className="flex gap-2 items-center"

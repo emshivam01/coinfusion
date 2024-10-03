@@ -4,6 +4,10 @@
 
 /* styles/globals.css */
 
+h1 {
+  font-family: "Bebas Neue", monospace; /* Change this if you want a different font */
+}
+
 body {
   transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
 }

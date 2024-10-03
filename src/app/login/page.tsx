@@ -52,7 +52,7 @@ const Login = () => {
   }, [userCredentials]);
 
   return (
-    <div className="w-screen h-full md:mt-14 flex justify-center items-center">
+    <div className="w-screen h-full md:mt-28   flex justify-center items-center">
       <div
         className="max-w-md w-[380px] mx-auto
       bg-[#f8f8f8] dark:bg-[#141414]  rounded-none md:rounded-2xl p-8 border  md:p-8 mb-60 md:mb-0 shadow-md"

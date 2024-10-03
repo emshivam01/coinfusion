@@ -7,7 +7,8 @@ export const GET = async () => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-            }
+            },
+            cache: 'no-cache',
         };
 
         const response = await fetch(url, options); // Await fetch response

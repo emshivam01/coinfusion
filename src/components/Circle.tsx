@@ -25,7 +25,7 @@ export default function Circle() {
 
       {/* Outer Circles (reverse) */}
       <OrbitingCircles
-        className="size-[35px] border-none bg-transparent"
+        className="size-[25px] border-none bg-transparent"
         radius={230}
         duration={20}
         reverse
@@ -33,7 +33,7 @@ export default function Circle() {
         <Icons.ethereum />
       </OrbitingCircles>
       <OrbitingCircles
-        className="size-[50px] border-none bg-transparent"
+        className="size-[35px] border-none bg-transparent"
         radius={230}
         duration={20}
         delay={20}
@@ -60,7 +60,12 @@ const Icons = {
     </svg>
   ),
   ethereum: () => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+    <svg
+      width="100"
+      height="100"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 320 512"
+    >
       <path
         fill="currentColor"
         d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"
