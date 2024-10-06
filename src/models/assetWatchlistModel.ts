@@ -8,26 +8,55 @@ const watchlistSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users',
         required: true
-    }, // Reference to the user
+    },
     symbol: {
         type: String,
         required: true
-    }, // Cryptocurrency symbol (e.g., BTC, ETH)
+    },
     name: {
         type: String,
         required: true
-    }, // Full name of the cryptocurrency
+    },
     targetPrice: {
         type: Number,
         default: null
-    }, // Notify user if price hits this value
+    },
     notes: {
         type: String,
         default: ''
-    }, // Optional field for personal notes
+    },
+    current_price: {
+        type: Number,
+        required: true
+    },
+    price_change_percentage_1h_in_currency: {
+        type: Number,
+        required: true
+    },
+    price_change_percentage_24h_in_currency: {
+        type: Number,
+        required: true
+    },
+    price_change_percentage_7d_in_currency: {
+        type: Number,
+        required: true
+    },
+    market_cap: {
+        type: Number,
+        required: true
+    },
+    total_volume: {
+        type: Number,
+        required: true
+    },
+    circulating_supply: {
+        type: Number,
+        required: true
+    }
 }, {
     timestamps: true
 });
+
 
 // const Watchlist = mongoose.model('Watchlist', watchlistSchema);
 const Watchlist = mongoose.models.Watchlist || mongoose.model("Watchlist", watchlistSchema);

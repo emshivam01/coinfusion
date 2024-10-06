@@ -9,12 +9,20 @@ connect()
 export const POST = async (request: NextRequest) => {
 
     try {
-
-
         const token = request.cookies.get('token')?.value || "";
 
-        const { name, symbol, targetPrice, notes } = await request.json()
-        console.log(name, symbol, notes, targetPrice)
+        const { name,
+            symbol,
+            current_price,
+            price_change_percentage_1h_in_currency,
+            price_change_percentage_24h_in_currency,
+            price_change_percentage_7d_in_currency,
+            market_cap,
+            total_volume,
+            circulating_supply,
+            targetPrice,
+            notes, } = await request.json()
+
         if (!token) {
             return NextResponse.json({ message: "Token not provided", success: false }, { status: 401 });
         }
@@ -25,7 +33,17 @@ export const POST = async (request: NextRequest) => {
             const userId = decodedToken.id
 
             const watchlist = new Watchlist({
-                userId, name, symbol, targetPrice, notes
+                userId, name,
+                symbol,
+                targetPrice,
+                notes,
+                current_price,
+                price_change_percentage_1h_in_currency,
+                price_change_percentage_24h_in_currency,
+                price_change_percentage_7d_in_currency,
+                market_cap,
+                total_volume,
+                circulating_supply,
             })
 
             const response = await watchlist.save()
