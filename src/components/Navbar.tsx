@@ -14,7 +14,7 @@ const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const userData = useSelector((state: RootState) => state.user);
   const router = useRouter();
-
+  const pathname = usePathname(); // Get the current path
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -34,12 +34,8 @@ const Navbar = () => {
     document.body.classList.toggle("dark");
   };
 
-  // useEffect(() => {
-  //   document.body.classList.add("dark"); // Set dark mode as default on initial load
-  // }, []);
-
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-60 dark:bg-black dark:bg-opacity-60 my-4 p-6   md:my-0 font-bold flex justify-between border border-transparent backdrop-blur-md">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-60 dark:bg-[#09090b] dark:bg-opacity-60 my-4 p-6   md:my-0 font-bold flex justify-between border border-transparent backdrop-blur-md">
       <Link href="/">
         <h1 className="text-2xl md:text-3xl font-bold cursor-pointer">
           Coinfusion
@@ -68,11 +64,15 @@ const Navbar = () => {
             Log out
           </button>
         ) : (
-          <Link href="/login">
-            <button className="px-2 py-1 md:px-3 md:py-1.5 border border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 text-[14px] text-black dark:text-white font-semibold rounded-md">
-              Log in
-            </button>
-          </Link>
+          // Hide login button if on /login or /signup page
+          pathname !== "/login" &&
+          pathname !== "/signup" && (
+            <Link href="/login">
+              <button className="px-2 py-1 md:px-3 md:py-1.5 border border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 text-[14px] text-black dark:text-white font-semibold rounded-md">
+                Log in
+              </button>
+            </Link>
+          )
         )}
       </div>
     </div>
