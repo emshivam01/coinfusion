@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -17,15 +19,24 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const CoinList = () => {
+  const [watchlist, setWatchlist] = useState([]);
 
+  const fetchWatchlist = async () => {
+    const response = await axios.get("/api/watchlist");
+    setWatchlist(response.data.watchlist);
+    console.log(response.data.watchlist);
+  };
 
- 
-
+  useEffect(() => {
+    fetchWatchlist();
+  }, []);
 
   return (
-    <div className=" p-8">
+    <div className=" p-8 md:mt-24">
       <Table>
         <TableCaption>Your watchlist.</TableCaption>
         <TableHeader>
@@ -42,54 +53,30 @@ const CoinList = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">1.</TableCell>
-            <TableCell>Bitcoin</TableCell>
-            <TableCell>$73,000</TableCell>
-            <TableCell>0.22%</TableCell>
-            <TableCell>2.10%</TableCell>
-            <TableCell>10.01%</TableCell>
-            <TableCell>$1,257,869,744,952</TableCell>
-            <TableCell>$31,783,887,061</TableCell>
-            <TableCell className="text-right">19,761,350 BTC</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell className="font-medium">1.</TableCell>
-            <TableCell>Bitcoin</TableCell>
-            <TableCell>$73,000</TableCell>
-            <TableCell>0.22%</TableCell>
-            <TableCell>2.10%</TableCell>
-            <TableCell>10.01%</TableCell>
-            <TableCell>$1,257,869,744,952</TableCell>
-            <TableCell>$31,783,887,061</TableCell>
-            <TableCell className="text-right">19,761,350 BTC</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell className="font-medium">1.</TableCell>
-            <TableCell>Bitcoin</TableCell>
-            <TableCell>$73,000</TableCell>
-            <TableCell>0.22%</TableCell>
-            <TableCell>2.10%</TableCell>
-            <TableCell>10.01%</TableCell>
-            <TableCell>$1,257,869,744,952</TableCell>
-            <TableCell>$31,783,887,061</TableCell>
-            <TableCell className="text-right">19,761,350 BTC</TableCell>
-          </TableRow>
-
-
-          <TableRow>
-            <TableCell className="font-medium">1.</TableCell>
-            <TableCell>Bitcoin</TableCell>
-            <TableCell>$73,000</TableCell>
-            <TableCell>0.22%</TableCell>
-            <TableCell>2.10%</TableCell>
-            <TableCell>10.01%</TableCell>
-            <TableCell>$1,257,869,744,952</TableCell>
-            <TableCell>$31,783,887,061</TableCell>
-            <TableCell className="text-right">19,761,350 BTC</TableCell>
-          </TableRow>
+          {watchlist.map((coin, index) => {
+            return (
+              <TableRow key={coin?.id}>
+                <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell>{coin?.name}</TableCell>
+                <TableCell>${coin?.current_price}</TableCell>
+                <TableCell>
+                  {coin?.price_change_percentage_1h_in_currency.toFixed(2)}%
+                </TableCell>
+                <TableCell>
+                  {coin?.price_change_percentage_24h_in_currency.toFixed(2)}%
+                </TableCell>
+                <TableCell>
+                  {coin?.price_change_percentage_7d_in_currency.toFixed(2)}%
+                </TableCell>
+                <TableCell>${coin?.market_cap.toLocaleString()}</TableCell>
+                <TableCell>${coin?.total_volume.toLocaleString()}</TableCell>
+                <TableCell className="text-right">
+                  {coin?.circulating_supply.toLocaleString()}{" "}
+                  {coin?.symbol.toUpperCase()}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
 

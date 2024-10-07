@@ -30,9 +30,9 @@ export default function Home() {
   return (
     <div className="flex flex-col  items-center justify-items-center h-full  gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <Circle />
-      <h1 className="text-center text-2xl md:text-4xl mx-auto font-bold  text-black dark:text-white mt-10 md:mt-28">
+      <h2 className="text-center text-2xl md:text-4xl mx-auto font-bold  text-black dark:text-white mt-10 md:mt-28">
         Ride the Crypto Wave:Surf, Track, Conquer!
-      </h1>
+      </h2>
       <Searchbar />
       <MarqueeDemo />
     </div>

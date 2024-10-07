@@ -27,7 +27,8 @@ export function middleware(request: NextRequest) {
 
 // Path where middleware will be executed
 export const config = {
-    matcher: [      // Home page
+    matcher: [
+        '/watchlist',  // Watchlist page
         '/signup',  // Signup page
         '/login',   // Login page
         '/profile'  // Profile page

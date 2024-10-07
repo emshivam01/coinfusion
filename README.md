@@ -1,4 +1,4 @@
-# Your App Name
+# Coinfusion
 
 ## Description
 
