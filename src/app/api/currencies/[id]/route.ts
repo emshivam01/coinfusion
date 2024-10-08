@@ -15,7 +15,7 @@ export const GET = async (request: NextRequest, { params }: { params: { id: stri
 
         const response = await fetch(url, options);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         return NextResponse.json({ data }); // Return the actual data
     } catch (error) {

@@ -13,7 +13,7 @@ export const GET = async () => {
 
         const response = await fetch(url, options); // Await fetch response
         const data = await response.json(); // Await json parsing
-        console.log(data); // Log the data if needed
+        // console.log(data); // Log the data if needed
 
         return NextResponse.json({ data }); // Return the actual data
     } catch (error) {
