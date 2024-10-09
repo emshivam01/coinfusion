@@ -35,7 +35,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-60 dark:bg-[#09090b] dark:bg-opacity-60 my-4 p-6   md:my-0 font-bold flex justify-between border border-transparent backdrop-blur-md">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-60 dark:bg-[#171f2e] dark:bg-opacity-60 my-4 p-6   md:my-0 font-bold flex justify-between border border-transparent backdrop-blur-md">
       <Link href="/">
         <h1 className="text-2xl md:text-3xl font-bold cursor-pointer">
           Coinfusion

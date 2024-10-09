@@ -66,23 +66,31 @@ const Chart = ({ id }: { id: string }) => {
           <p className="text-red-500">Error loading chart data</p>
         ) : (
           <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
             <XAxis dataKey="Time" />
             <YAxis
-              domain={["auto", "auto"]}
+              domain={["dataMax", "dataMin"]}
               padding={{ top: 20, bottom: 20 }}
               stroke="#8884d8"
               fontSize={14}
               tickLine={{ stroke: "#ccc", strokeWidth: 1 }}
             />
-            <Tooltip itemStyle={{ fontSize: 15, borderRadius: 10 }} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#171f2e",
+                border: "none",
+                borderRadius: "8px",
+              }}
+              labelStyle={{ color: "#F3F4F6" }}
+              itemStyle={{ color: "#60A5FA", fontSize: 15, borderRadius: 10 }}
+            />
             <Line type="linear" dataKey="Price" stroke="#8884d8" />
           </LineChart>
         )}
       </ResponsiveContainer>
 
-      <div className="flex justify-between w-40 border bg-[#eff2f5] dark:bg-gray-800 rounded-md p-1">
-        {["1d", "7d", "365d"].map((period) => (
+      <div className="flex justify-evenly gap-2 w-40 border bg-[#eff2f5] dark:bg-gray-800 rounded-md p-1">
+        {["24H", "7d", "1y"].map((period) => (
           <button
             key={period}
             onClick={() => handleFilterChange(period)}

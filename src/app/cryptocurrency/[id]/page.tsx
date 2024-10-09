@@ -131,7 +131,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 
       {/* Chart Section */}
 
-      <Chart id={coinData?.id} days="1" />
+      <Chart id={coinData?.id} />
 
       {/* {console.log(coinData?)} */}
 
