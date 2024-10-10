@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner"; // sonner toaster via shadcn
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import StoreProvider from "@/redux/StoreProvider";
+import Footer from "@/components/Footer";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -40,6 +41,7 @@ export default function RootLayout({
             <main>{children}</main>
             <Toaster />
             {/* <div className="hidden md:block"></div> */}
+            <Footer />
           </ThemeProvider>
         </StoreProvider>
       </body>
