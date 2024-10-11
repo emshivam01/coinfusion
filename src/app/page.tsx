@@ -25,6 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchCryptoData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
