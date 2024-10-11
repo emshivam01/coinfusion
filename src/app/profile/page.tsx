@@ -6,12 +6,18 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import AssetCard from "@/components/AssetCard";
 import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ProfileHead from "@/components/ProfileComponents/ProfileHead";
+import Overview from "@/components/ProfileComponents/Overview";
+import Portfolio from "@/components/ProfileComponents/Portfolio";
+import Activity from "@/components/ProfileComponents/Activity";
 
 export default function Profile() {
   const [data, setData] = useState(null);
   const [portfolioData, setPortfolioData] = useState([]);
 
-  const userData = useSelector((state) => state.user);
+  const userData = useSelector((state: RootState) => state.user);
 
   const router = useRouter();
 
@@ -38,39 +44,49 @@ export default function Profile() {
   //   }
   // };
 
-  const fetchPortfolio = async () => {
-    try {
-      const response = await axios.get("/api/portfolio"); // Use .get() for clarity
-      setPortfolioData(response.data.portfolio[0].assets); // Ensure portfolioData is an array
-    } catch (error) {
-      console.error("Failed to fetch portfolio:", error);
-      toast("Error fetching portfolio data");
-    }
-  };
+  // const fetchPortfolio = async () => {
+  //   try {
+  //     const response = await axios.get("/api/portfolio"); // Use .get() for clarity
+  //     setPortfolioData(response.data.portfolio[0].assets); // Ensure portfolioData is an array
+  //   } catch (error) {
+  //     console.error("Failed to fetch portfolio:", error);
+  //     toast("Error fetching portfolio data");
+  //   }
+  // };
 
-  useEffect(() => {
-    getProfile();
-    fetchPortfolio();
-  }, []);
+  // useEffect(() => {
+  //   getProfile();
+  //   fetchPortfolio();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
-    <div>
-      <div className="flex justify-between m-8 p-8 rounded-md border-2 border-[#27272a]">
-        <div className="card border border-[#3a3a3c] p-4 h-64 rounded-md">
-          <h2 className="text-xl font-semibold">
-            Hello👋 {data?.username || "User"}
-          </h2>
-          <div>
-            {portfolioData.length > 0 ? (
-              portfolioData.map((asset) => {
-                // console.log(asset); // Make sure asset is not undefined here
-                return <AssetCard {...asset} key={asset.id} />; // Spread the asset object as props
-              })
-            ) : (
-              <p>No assets available</p>
-            )}
-          </div>
-        </div>
+    <div className="mt-24 px-20">
+      <ProfileHead />
+
+      <div className="mt-4">
+        <Tabs defaultValue="account" className="w-full">
+          <TabsList className=" dark:bg-[#253041] shadow-md">
+            <TabsTrigger className="text-base" value="account">
+              Overview
+            </TabsTrigger>
+            <TabsTrigger className="text-base" value="password">
+              Portfolio
+            </TabsTrigger>
+            <TabsTrigger className="text-base" value="activity">
+              Activity
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="account">
+            <Overview />
+          </TabsContent>
+          <TabsContent value="password">
+            <Portfolio />
+          </TabsContent>
+          <TabsContent value="activity">
+            <Activity />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
