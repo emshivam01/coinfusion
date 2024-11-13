@@ -61,12 +61,12 @@ export default function Profile() {
   // }, []);
 
   return (
-    <div className="mt-24 px-20">
+    <div className="mt-24 px-6 md:px-20">
       <ProfileHead />
 
       <div className="mt-4">
         <Tabs defaultValue="account" className="w-full">
-          <TabsList className=" dark:bg-[#253041] shadow-md">
+          <TabsList className="  dark:bg-[#253041] shadow-md">
             <TabsTrigger className="text-base" value="account">
               Overview
             </TabsTrigger>

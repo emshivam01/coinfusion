@@ -38,20 +38,20 @@ const portfolioData = [
 
 const Overview = () => {
   return (
-    <div className="grid gap-4 w-full ">
+    <div className="grid md:grid-cols-3 gap-4 w-full ">
       {/* Value & Statistics */}
 
-      <div className="  py-2 flex md:flex-col  justify-evenly bg-[#f4f4f5] dark:bg-[#1f2937] text-white dark:text-white p-4 w-full rounded-md  shadow-md">
+      <div className="p-2 grid gap-4 bg-[#f4f4f5] dark:bg-[#1f2937] text-white dark:text-white  w-full rounded-md  shadow-md">
         <div className="p-3  bg-gradient-to-br from-blue-600 to-blue-700 border-blue-500  rounded-md shadow-xl ">
           <p className="mb-2 text-lg font-semibold">Portfolio Value</p>
           <p className="text-2xl font-bold"> $ 20,254</p>
         </div>
         <div className="p-3 bg-gradient-to-br from-blue-600 to-blue-700 border-blue-500  rounded-md shadow-xl">
-          <p className="my-2  text-lg font-semibold">Best Performer</p>
+          <p className="mb-2 text-lg font-semibold">Best Performer</p>
           <p className="text-2xl font-bold"> EigenLayer</p>
         </div>
         <div className="p-3 bg-gradient-to-br from-red-600 to-red-700 border-red-500 rounded-md shadow-xl">
-          <p className="my-2  text-lg font-semibold ">Worst Performer</p>
+          <p className="mb-2  text-lg font-semibold ">Worst Performer</p>
           <p className="text-2xl font-bold"> Arbitrium</p>
         </div>
       </div>

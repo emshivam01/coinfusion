@@ -10,7 +10,7 @@ import {
 
 const Activity = () => {
   return (
-    <div className="py-1 dark:bg-[#1f2937] p-4 w-full h-[400px] ">
+    <div className="py-1 dark:bg-[#1f2937] p-4 w-full  ">
       <Table>
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>

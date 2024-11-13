@@ -45,6 +45,8 @@ const Navbar = () => {
         <Link href="/cryptocurrency">Cryptocurrency</Link>
         <Link href="/watchlist">Watchlist</Link>
 
+        <Link href="/portfolio">Portfolio</Link>
+
         <button
           onClick={toggleTheme}
           className="p-1.5 text-base text-black dark:text-white font-bold rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
