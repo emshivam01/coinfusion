@@ -73,8 +73,8 @@ const CoinList = () => {
   const handleToggleWatchlist = async (coin) => {
     const isInWatchlist = isCoinInWatchlist(coin.symbol);
     const watchlistData = {
+      symbol: coin.symbol, // Added symbol here for consistency with the backend
       name: coin.name,
-      // Removed symbol from here
       current_price: coin.current_price,
       price_change_percentage_1h_in_currency:
         coin.price_change_percentage_1h_in_currency,
@@ -99,10 +99,10 @@ const CoinList = () => {
         const response = await axios.post("/api/watchlist", watchlistData, {
           headers: { "Content-Type": "application/json" },
         });
-        if (response.status === 201) {
+        if (response.status === 201 || response.status === 200) {
           setWatchlist((prev) => [
             ...prev,
-            { symbol: coin.symbol, ...watchlistData }, // Now `symbol` will not cause conflict
+            { symbol: coin.symbol, ...watchlistData },
           ]);
         }
       }

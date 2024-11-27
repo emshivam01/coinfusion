@@ -31,6 +31,7 @@ export const config = {
         '/watchlist',  // Watchlist page
         '/signup',  // Signup page
         '/login',   // Login page
-        '/profile'  // Profile page
+        '/profile',  // Profile page
+        '/portfolio'
     ]
 }

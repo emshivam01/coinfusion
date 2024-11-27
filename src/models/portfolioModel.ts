@@ -10,11 +10,13 @@ const transactionSchema = new Schema({
     }, // Type of transaction: buy or sell
     quantity: {
         type: Number,
-        required: true
+        required: true,
+        min: [0, 'Quantity must be a positive number']
     }, // Quantity of asset bought/sold
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: [0, 'Price must be a positive number']
     }, // Price per unit at the time of transaction
     date: {
         type: Date,
@@ -89,6 +91,7 @@ const portfolioSchema = new Schema({
 
 // module.exports = mongoose.model('Portfolio', portfolioSchema);
 
+
 const Portfolio = mongoose.models.Portfolio || mongoose.model("Portfolio", portfolioSchema);
 
-export default Portfolio;
+export default Portfolio; 
